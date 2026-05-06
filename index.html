@@ -95,7 +95,12 @@
             text-align: center;
             height: 100%;
             width: 100%;
-            padding: 4rem;
+            max-width: 100%;
+            padding:
+                max(1.25rem, env(safe-area-inset-top))
+                clamp(1rem, 5vw, 4rem)
+                max(1.25rem, env(safe-area-inset-bottom))
+                clamp(1rem, 5vw, 4rem);
             pointer-events: none;
         }
 
@@ -104,19 +109,52 @@
             pointer-events: auto;
         }
 
-        h1 {
-            font-size: 1.5rem;
-            font-weight: 500;
-            letter-spacing: 0.1em;
+        /* Hero lockup only (single h1 on page) */
+        .hero .content h1 {
+            font-size: clamp(1.5rem, 4vw + 0.6rem, 2.85rem);
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            line-height: 1.12;
             text-transform: uppercase;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
             color: #fff;
+            text-shadow:
+                0 0 1px rgba(0, 0, 0, 1),
+                0 1px 2px rgba(0, 0, 0, 0.9),
+                0 0 24px rgba(0, 0, 0, 0.95),
+                0 0 60px rgba(0, 0, 0, 0.75);
         }
 
         .hero .tagline {
-            font-size: 1rem;
-            color: #666;
-            letter-spacing: 0.05em;
+            font-size: clamp(0.62rem, 0.42rem + 1.9vw, 1.05rem);
+            font-weight: 500;
+            color: #d4d4d4;
+            letter-spacing: 0.12em;
+            line-height: 1.5;
+            white-space: nowrap;
+            text-shadow:
+                0 0 12px rgba(0, 0, 0, 0.95),
+                0 1px 3px rgba(0, 0, 0, 1);
+        }
+
+        @media (max-width: 640px) {
+            .hero .content h1 {
+                font-size: clamp(1.35rem, 5.2vw + 0.35rem, 1.85rem);
+                letter-spacing: 0.1em;
+                max-width: 100%;
+            }
+
+            .hero .tagline {
+                letter-spacing: 0.08em;
+                font-size: clamp(0.58rem, 0.38rem + 2.1vw, 0.95rem);
+            }
+        }
+
+        @media (max-width: 380px) {
+            .hero .tagline {
+                letter-spacing: 0.05em;
+                font-size: clamp(0.5rem, 3.15vw, 0.85rem);
+            }
         }
 
         /* Minimalist Cursor Dot */
@@ -183,6 +221,12 @@
             pointer-events: auto;
         }
 
+        .card .lead {
+            color: #bbb;
+            font-size: 1.05rem;
+            margin-bottom: 1rem;
+        }
+
         .section-label {
             font-size: 0.75rem;
             text-transform: uppercase;
@@ -202,6 +246,65 @@
         .site-footer-copy {
             font-size: 0.8rem;
             color: #444;
+        }
+
+        .footer-brand-link {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .footer-brand-link:hover {
+            color: #888;
+        }
+
+        .container a {
+            cursor: pointer;
+        }
+
+        .portfolio-lede {
+            max-width: 800px;
+            margin-top: 1rem;
+            color: #aaa;
+            line-height: 1.7;
+        }
+
+        .portfolio-actions {
+            margin-top: 1.5rem;
+        }
+
+        .text-link {
+            display: inline-block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: #fff;
+            text-decoration: none;
+            border-bottom: 1px solid #444;
+            padding-bottom: 0.25rem;
+            transition: border-color 0.25s ease, color 0.25s ease;
+        }
+
+        .text-link:hover {
+            border-color: #fff;
+            color: #fff;
+        }
+
+        .card-link {
+            display: inline-block;
+            margin-top: 1.25rem;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #888;
+            text-decoration: none;
+            border-bottom: 1px solid #333;
+            padding-bottom: 0.2rem;
+            transition: border-color 0.25s ease, color 0.25s ease;
+        }
+
+        .card-link:hover {
+            border-color: #fff;
+            color: #ccc;
         }
     </style>
 </head>
@@ -248,9 +351,32 @@
             </p>
         </section>
 
+        <!-- GitHub portfolio -->
+        <section id="portfolio" style="background: #050505; border-top: 1px solid #111;">
+            <span class="section-label">03 // GitHub</span>
+            <h2>Portfolio &amp; Source</h2>
+            <p class="portfolio-lede">
+                Source and releases live on GitHub—starting with TEPA. More builds will follow as products ship.
+            </p>
+            <p class="portfolio-actions">
+                <a class="text-link" href="https://github.com/banxengineering" target="_blank" rel="noopener noreferrer">View GitHub profile</a>
+            </p>
+            <div class="grid">
+                <div class="card">
+                    <h3>TEPA</h3>
+                    <p class="lead">The desk companion that feels alive.</p>
+                    <p>
+                        Time, focus, and play on your desk—glance and tap instead of the unlock spiral. Reacts to your voice and music; nudges breaks and posture with personality, not buzzes. QR Wi‑Fi on first boot—no app-store detour.
+                        If you ship in long sessions, TEPA is the physical anchor: flow for developers, vibe and BPM for producers, gentle rhythm for makers.
+                    </p>
+                    <a class="card-link" href="https://github.com/banxengineering/tepa" target="_blank" rel="noopener noreferrer">Open repository</a>
+                </div>
+            </div>
+        </section>
+
         <!-- Footer -->
         <section style="padding: 4rem; text-align: center; border-top: 1px solid #111;">
-            <p class="site-footer-copy">&copy; 2026 BANX ENGINEERING LLC // DESIGNED FOR THE BOLD.</p>
+            <p class="site-footer-copy">&copy; 2026 <a class="footer-brand-link" href="https://banxengineering.com/">BANX ENGINEERING LLC</a> // DESIGNED FOR THE BOLD.</p>
         </section>
     </div>
 
